@@ -130,7 +130,7 @@ def sub_check_kb() -> InlineKeyboardMarkup:
 # ================= HELPERS =================
 
 async def show_menu(message: Message):
-    # DEBUG: Hangi ID'ler karşılaştırılıyor görelim
+    # DEBUG
     logger.info(f"DEBUG: User ID={message.from_user.id}, ADMIN_ID={ADMIN_ID}")
     logger.info(f"DEBUG: Equal? {message.from_user.id == ADMIN_ID}")
     
