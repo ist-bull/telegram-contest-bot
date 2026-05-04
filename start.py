@@ -130,6 +130,10 @@ def sub_check_kb() -> InlineKeyboardMarkup:
 # ================= HELPERS =================
 
 async def show_menu(message: Message):
+    # DEBUG: Hangi ID'ler karşılaştırılıyor görelim
+    logger.info(f"DEBUG: User ID={message.from_user.id}, ADMIN_ID={ADMIN_ID}")
+    logger.info(f"DEBUG: Equal? {message.from_user.id == ADMIN_ID}")
+    
     if message.from_user.id == ADMIN_ID:
         await message.answer("👨‍💻 Admin panel", reply_markup=admin_menu_kb())
     else:
