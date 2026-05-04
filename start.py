@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import aiosqlite
+import os
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart, Command
@@ -15,11 +16,21 @@ from aiogram.types import (
 )
 
 # ================= CONFIG =================
+# Environment variables'dan oku (güvenli)
+TOKEN = os.getenv("BOT_TOKEN", "")
+CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
+CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "")
+ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
 
-TOKEN = "8661995012:AAFMm_5FqZAOUXX4MUg8SPUQGvqg5f5ahKw"
-CHANNEL_ID = -1002368222323
-CHANNEL_USERNAME = "konkurs_chanel_test"
-ADMIN_ID = 6458736545
+# Eksik değer kontrolü
+if not TOKEN:
+    raise ValueError("BOT_TOKEN environment variable tanımlanmali!")
+if not CHANNEL_ID:
+    raise ValueError("CHANNEL_ID environment variable tanımlanmali!")
+if not CHANNEL_USERNAME:
+    raise ValueError("CHANNEL_USERNAME environment variable tanımlanmali!")
+if not ADMIN_ID:
+    raise ValueError("ADMIN_ID environment variable tanımlanmali!")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -60,7 +71,6 @@ async def db_start():
             )
         """)
 
-        # Limit yo'q — oddiy log, PRIMARY KEY olib tashlandi
         await db.execute("""
             CREATE TABLE IF NOT EXISTS users_votes (
                 id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -70,7 +80,6 @@ async def db_start():
             )
         """)
 
-        # Pending — obuna bo'lmagan foydalanuvchi variantni saqlab turadi
         await db.execute("""
             CREATE TABLE IF NOT EXISTS pending_votes (
                 user_id    INTEGER PRIMARY KEY,
