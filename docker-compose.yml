@@ -8,6 +8,10 @@ services:
     volumes:
       - bot-data:/app/data
     environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - CHANNEL_ID=${CHANNEL_ID}
+      - CHANNEL_USERNAME=${CHANNEL_USERNAME}
+      - ADMIN_ID=${ADMIN_ID}
       - TZ=Asia/Tashkent
 
 volumes:
