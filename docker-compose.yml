@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    container_name: telegram-contest-bot
+    restart: unless-stopped
+    volumes:
+      - bot-data:/app/data
+    environment:
+      - TZ=Asia/Tashkent
+
+volumes:
+  bot-data:
