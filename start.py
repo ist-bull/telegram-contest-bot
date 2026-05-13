@@ -17,12 +17,22 @@ from aiogram.types import (
 
 # ================= CONFIG =================
 
+TOKEN = os.getenv("BOT_TOKEN", "")
+CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
+CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "")
+ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
+
+# LOGGER TANIMLAMASI - DEBUG LOGUNDAN ÖNCE
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# DEBUG: Environment variables kontrolü
 logger.info(f"DEBUG: BOT_TOKEN={TOKEN}")
 logger.info(f"DEBUG: CHANNEL_ID={CHANNEL_ID}")
 logger.info(f"DEBUG: CHANNEL_USERNAME={CHANNEL_USERNAME}")
 logger.info(f"DEBUG: ADMIN_ID={ADMIN_ID}")
 
-# Eksik değer kontrolü (raise yerine uyarı)
+# Eksik değer kontrolü
 if not TOKEN:
     logger.error("BOT_TOKEN bos! Bot ishlamaydi.")
 if not CHANNEL_ID:
@@ -31,9 +41,6 @@ if not CHANNEL_USERNAME:
     logger.error("CHANNEL_USERNAME bos!")
 if not ADMIN_ID:
     logger.error("ADMIN_ID bos!")
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
