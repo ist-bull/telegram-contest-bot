@@ -31,6 +31,11 @@ if not CHANNEL_USERNAME:
 if not ADMIN_ID:
     raise ValueError("ADMIN_ID")
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+bot = Bot(token=TOKEN)
+dp = Dispatcher(storage=MemoryStorage())
 
 # ================= FSM STATES =================
 
