@@ -17,19 +17,20 @@ from aiogram.types import (
 
 # ================= CONFIG =================
 
-TOKEN = os.getenv("BOT_TOKEN", "")
-CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
-CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "")
-ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
+logger.info(f"DEBUG: BOT_TOKEN={TOKEN}")
+logger.info(f"DEBUG: CHANNEL_ID={CHANNEL_ID}")
+logger.info(f"DEBUG: CHANNEL_USERNAME={CHANNEL_USERNAME}")
+logger.info(f"DEBUG: ADMIN_ID={ADMIN_ID}")
 
+# Eksik değer kontrolü (raise yerine uyarı)
 if not TOKEN:
-    raise ValueError("BOT_TOKEN")
+    logger.error("BOT_TOKEN bos! Bot ishlamaydi.")
 if not CHANNEL_ID:
-    raise ValueError("CHANNEL_ID")
+    logger.error("CHANNEL_ID bos!")
 if not CHANNEL_USERNAME:
-    raise ValueError("CHANNEL_USERNAME")
+    logger.error("CHANNEL_USERNAME bos!")
 if not ADMIN_ID:
-    raise ValueError("ADMIN_ID")
+    logger.error("ADMIN_ID bos!")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
